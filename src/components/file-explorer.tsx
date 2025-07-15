@@ -79,7 +79,7 @@ export default function FileExplorer({ files, activeFileId, onFileSelect, onAddF
                          <span className="sr-only">Rename file</span>
                     </Button>
                     <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-destructive/10" onClick={() => setDeleteDialogFile(file)}>
-                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                        <Trash2 className="h-3.5 w-3.5 text-red-500" />
                         <span className="sr-only">Delete file</span>
                     </Button>
                 </div>
