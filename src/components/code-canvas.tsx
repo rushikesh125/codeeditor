@@ -11,7 +11,7 @@ import Terminal from '@/components/terminal';
 import { useToast } from "@/hooks/use-toast";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { Button } from '@/components/ui/button';
-import { PanelLeft } from 'lucide-react';
+import { PanelLeft, Play, Send } from 'lucide-react';
 import { useSidebar } from '@/components/ui/sidebar';
 
 const initialFiles: CodeFile[] = [
@@ -196,11 +196,18 @@ function CodeCanvasContent() {
     ));
     toast({ title: "Success", description: `Renamed "${oldName}" to "${newName}".` });
   };
+  
+  const handleRunCode = () => {
+    if (activeFile && activeFile.language === 'javascript') {
+      setTerminalOutput([]);
+      executeCode(activeFile.content);
+    }
+  }
 
   const handleCommand = (command: string) => {
     setTerminalOutput(prev => [...prev, `> ${command}`]);
     if (command.toLowerCase() === 'run' && activeFile && activeFile.language === 'javascript') {
-      executeCode(activeFile.content);
+      handleRunCode();
     } else if (command.toLowerCase() === 'clear') {
        setTerminalOutput([]);
     } else {
@@ -229,18 +236,32 @@ function CodeCanvasContent() {
               </div>
               <PanelGroup direction="vertical">
                   <Panel defaultSize={70} minSize={20}>
-                      {activeFile ? (
-                          <EditorComponent
-                              key={activeFile.id}
-                              language={activeFile.language}
-                              value={activeFile.content}
-                              onChange={handleCodeChange}
-                          />
-                      ) : (
-                          <div className="flex items-center justify-center h-full text-muted-foreground">
-                              Select a file to start editing
-                          </div>
-                      )}
+                    <div className="h-full flex flex-col">
+                       <div className="flex items-center justify-end gap-2 p-2 border-b bg-accent/30">
+                          <Button variant="secondary" size="sm" onClick={handleRunCode}>
+                            <Play className="mr-2 h-4 w-4" />
+                            Run
+                          </Button>
+                          <Button size="sm" onClick={() => toast({ title: "Submit Clicked", description: "Submit functionality not yet implemented."})}>
+                            <Send className="mr-2 h-4 w-4" />
+                            Submit
+                          </Button>
+                        </div>
+                        <div className="flex-grow h-0">
+                          {activeFile ? (
+                              <EditorComponent
+                                  key={activeFile.id}
+                                  language={activeFile.language}
+                                  value={activeFile.content}
+                                  onChange={handleCodeChange}
+                              />
+                          ) : (
+                              <div className="flex items-center justify-center h-full text-muted-foreground">
+                                  Select a file to start editing
+                              </div>
+                          )}
+                        </div>
+                    </div>
                   </Panel>
                   <PanelResizeHandle className="h-2 bg-border data-[resize-handle-state=drag]:bg-primary transition-colors" />
                   <Panel defaultSize={30} minSize={10}>
