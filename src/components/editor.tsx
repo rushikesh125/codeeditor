@@ -17,7 +17,6 @@ export default function EditorComponent({ language, value, onChange }: EditorCom
       language={language}
       value={value}
       onChange={onChange}
-      theme="vs-dark"
       options={{
         fontSize: 14,
         minimap: { enabled: true },
