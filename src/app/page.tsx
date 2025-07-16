@@ -1,3 +1,4 @@
+"use client"
 import CodeCanvas from "@/components/code-canvas";
 
 export default function Home() {
