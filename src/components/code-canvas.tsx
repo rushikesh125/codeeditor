@@ -254,11 +254,11 @@ function CodeCanvasContent() {
                   <Panel defaultSize={70} minSize={20}>
                     <div className="h-full flex flex-col">
                        <div className="flex items-center justify-start gap-2 p-2 border-b bg-accent/30">
-                          <Button variant="secondary" size="sm" onClick={handleRunCode}>
+                          <Button className='text-[#095899] bg-transparent border border-[#095899] hover:bg-transparent' size="sm" onClick={handleRunCode}>
                             <Play className="mr-2 h-4 w-4" />
                             Run
                           </Button>
-                          <Button size="sm" onClick={handleSubmit}>
+                          <Button size="sm" onClick={handleSubmit} className='bg-[#095899] text-white'>
                             <Send className="mr-2 h-4 w-4" />
                             Submit
                           </Button>
