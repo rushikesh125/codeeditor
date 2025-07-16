@@ -253,7 +253,7 @@ function CodeCanvasContent() {
               <PanelGroup direction="vertical">
                   <Panel defaultSize={70} minSize={20}>
                     <div className="h-full flex flex-col">
-                       <div className="flex items-center justify-end gap-2 p-2 border-b bg-accent/30">
+                       <div className="flex items-center justify-start gap-2 p-2 border-b bg-accent/30">
                           <Button variant="secondary" size="sm" onClick={handleRunCode}>
                             <Play className="mr-2 h-4 w-4" />
                             Run
