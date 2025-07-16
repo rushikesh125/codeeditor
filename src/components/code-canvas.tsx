@@ -202,7 +202,23 @@ function CodeCanvasContent() {
       setTerminalOutput([]);
       executeCode(activeFile.content);
     }
-  }
+  };
+
+  const handleSubmit = () => {
+    const submission = {
+      files: files.map(({ id, language, ...rest }) => rest), // Omit id and language
+      terminalContent: terminalOutput,
+    };
+
+    const formattedSubmission = JSON.stringify(submission, null, 2);
+    
+    // Log to browser console
+    console.log("Submission Data:", submission);
+
+    // Add to app terminal
+    setTerminalOutput(prev => [...prev, "--- Submission ---", formattedSubmission, "------------------"]);
+    toast({ title: "Submitted", description: "Project data logged to console."});
+  };
 
   const handleCommand = (command: string) => {
     setTerminalOutput(prev => [...prev, `> ${command}`]);
@@ -242,7 +258,7 @@ function CodeCanvasContent() {
                             <Play className="mr-2 h-4 w-4" />
                             Run
                           </Button>
-                          <Button size="sm" onClick={() => toast({ title: "Submit Clicked", description: "Submit functionality not yet implemented."})}>
+                          <Button size="sm" onClick={handleSubmit}>
                             <Send className="mr-2 h-4 w-4" />
                             Submit
                           </Button>
